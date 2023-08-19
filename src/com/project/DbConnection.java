@@ -3,8 +3,8 @@ package com.project;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DbFunctions {
-    public Connection connect_to_db(String dbname, String user, String password){
+public class DbConnection {
+    public Connection connectToDb(String dbname, String user, String password){
         Connection connection = null;
         try{
             Class.forName("org.postgresql.Driver");
@@ -20,4 +20,6 @@ public class DbFunctions {
         }
         return connection;
     }
+
+
 }
