@@ -3,7 +3,7 @@ package com.project;
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class DbInsertions {
+public class DbInsertFunctions {
     public void insertRowEmployee(Connection connection, String firstName, String lastName, String jobType){ //...
         Statement statement;
         try{

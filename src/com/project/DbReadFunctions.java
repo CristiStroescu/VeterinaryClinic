@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DbReading {
+public class DbReadFunctions {
     public void readDataFromEmployee(Connection connection){
         Statement statement;
         ResultSet resultSet = null;
