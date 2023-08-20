@@ -24,7 +24,7 @@ public class DbUpdateFunctions {
                              int newData){
         Statement statement;
         try{
-            String query = String.format("update %s set "+type+"='%d' where "+type+"='%d'",
+            String query = String.format("update %s set "+type+"='%s' where "+type+"=%s",
                     tableName, newData, oldData);
             statement = connection.createStatement();
             statement.executeUpdate(query);
