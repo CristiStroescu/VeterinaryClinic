@@ -172,30 +172,11 @@ public class DbSearchFunctions {
         }
     }
 
-    public void SearchInInterventionProgrammingByInteger(Connection connection, String type, int value){
+    public void SearchInInterventionProgramming(Connection connection, String type, int value){
         Statement statement;
         ResultSet resultSet=null;
         try{
             String query=String.format("select*from intervention_programming where "+type+"=%s", value);
-            statement=connection.createStatement();
-            resultSet=statement.executeQuery(query);
-            System.out.println("[INFO] Data from \"intervention_programming\" table where "+ type+" = "+value+" " +
-                    "(id_employee, id_intervention):");
-            while (resultSet.next()){
-                System.out.print(resultSet.getString("id_employee")+" ");
-                System.out.println(resultSet.getString("id_intervention"));
-            }
-            System.out.println();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
-    public void SearchInInterventionProgrammingByString(Connection connection, String type, String value){
-        Statement statement;
-        ResultSet resultSet=null;
-        try{
-            String query=String.format("select*from intervention_programming where "+type+"='%s'", value);
             statement=connection.createStatement();
             resultSet=statement.executeQuery(query);
             System.out.println("[INFO] Data from \"intervention_programming\" table where "+ type+" = "+value+" " +

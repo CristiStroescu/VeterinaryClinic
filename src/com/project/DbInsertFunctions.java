@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class DbInsertFunctions {
-    public void insertRowEmployee(Connection connection, String firstName, String lastName, String jobType){ //...
+    public void insertRowEmployee(Connection connection, String firstName, String lastName, String jobType){
         Statement statement;
         try{
             String query=String.format("insert into %s(first_name, last_name, job_type) values('%s','%s','%s');"

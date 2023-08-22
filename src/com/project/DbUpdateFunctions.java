@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 public class DbUpdateFunctions {
-    public void UpdateString(Connection connection, String type, String tableName, String oldData,
+    public void UpdateString(Connection connection, String tableName, String type, String oldData,
                                 String newData){
         Statement statement;
         try{
@@ -20,7 +20,7 @@ public class DbUpdateFunctions {
         }
     }
 
-    public void UpdateInteger(Connection connection, String type, String tableName, int oldData,
+    public void UpdateInteger(Connection connection, String tableName, String type, int oldData,
                              int newData){
         Statement statement;
         try{
