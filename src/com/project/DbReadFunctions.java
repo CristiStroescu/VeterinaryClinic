@@ -16,8 +16,8 @@ public class DbReadFunctions {
             while (resultSet.next()){
                 System.out.print(resultSet.getString("id")+" ");
                 System.out.print(resultSet.getString("first_name")+" ");
-                System.out.print(resultSet.getString("last_name")+" ");
-                System.out.println(resultSet.getString("job_type"));
+                System.out.print(resultSet.getString("last_name")+" [");
+                System.out.println(resultSet.getString("job_type")+"]");
             }
             System.out.println();
         }catch (Exception e){
@@ -36,8 +36,8 @@ public class DbReadFunctions {
             while (resultSet.next()){
                 System.out.print(resultSet.getString("id")+" ");
                 System.out.print(resultSet.getString("first_name")+" ");
-                System.out.print(resultSet.getString("last_name")+" ");
-                System.out.println(resultSet.getString("phone_number"));
+                System.out.print(resultSet.getString("last_name")+" [");
+                System.out.println(resultSet.getString("phone_number")+"]");
             }
             System.out.println();
         }catch (Exception e){
@@ -57,8 +57,8 @@ public class DbReadFunctions {
             while (resultSet.next()){
                 System.out.print(resultSet.getString("id_employee")+" ");
                 System.out.print(resultSet.getString("id_pet")+" ");
-                System.out.print(resultSet.getString("appointment_time")+" ");
-                System.out.print(resultSet.getString("data")+" ");
+                System.out.print(resultSet.getString("appointment_time")+" [");
+                System.out.print(resultSet.getString("data")+"] $");
                 System.out.println(resultSet.getString("total_cost"));
             }
             System.out.println();
@@ -76,8 +76,8 @@ public class DbReadFunctions {
             resultSet = statement.executeQuery(query);
             System.out.println("[INFO] Data from \"intervention\" table (id, name, cost):");
             while (resultSet.next()){
-                System.out.print(resultSet.getString("id")+" ");
-                System.out.print(resultSet.getString("name")+" ");
+                System.out.print(resultSet.getString("id")+" [");
+                System.out.print(resultSet.getString("name")+"] $");
                 System.out.println(resultSet.getString("cost"));
             }
             System.out.println();
@@ -115,8 +115,8 @@ public class DbReadFunctions {
             System.out.println("[INFO] Data from \"pet\" table (id, id_client, type):");
             while (resultSet.next()){
                 System.out.print(resultSet.getString("id")+" ");
-                System.out.print(resultSet.getString("id_client")+" ");
-                System.out.println(resultSet.getString("type"));
+                System.out.print(resultSet.getString("id_client")+" [");
+                System.out.println(resultSet.getString("type")+"]");
             }
             System.out.println();
         }catch (Exception e){
@@ -135,9 +135,9 @@ public class DbReadFunctions {
                     " id_employee):");
             while (resultSet.next()){
                 System.out.print(resultSet.getString("id")+" ");
-                System.out.print(resultSet.getString("day")+" ");
-                System.out.print(resultSet.getString("start_time")+" ");
-                System.out.print(resultSet.getString("end_time")+" ");
+                System.out.print(resultSet.getString("day")+" [");
+                System.out.print(resultSet.getString("start_time")+"] [");
+                System.out.print(resultSet.getString("end_time")+"] ");
                 System.out.println(resultSet.getString("id_employee"));
             }
             System.out.println();

@@ -31,11 +31,11 @@ public class DbInsertFunctions {
     }
 
     public void insertRowAppointments(Connection connection, int idEmployee, int idPet, String appointmentTime,
-                                      String data, String totalCost){
+                                      String data, int totalCost){
         Statement statement;
         try{
             String query=String.format("insert into %s(id_employee, id_pet, appointment_time, data, total_cost)" +
-                            " values('%d','%d','%s',%s, %s);"
+                            " values('%d','%d','%s','%s', '%d');"
                     ,"appointments",idEmployee,idPet,appointmentTime,data, totalCost);
             statement=connection.createStatement();
             statement.executeUpdate(query);
@@ -72,10 +72,10 @@ public class DbInsertFunctions {
         }
     }
 
-    public void insertRowIntervention(Connection connection, String name, String cost){
+    public void insertRowIntervention(Connection connection, String name, int cost){
         Statement statement;
         try{
-            String query=String.format("insert into %s(name, cost) values('%s','%s');"
+            String query=String.format("insert into %s(name, cost) values('%s','%d');"
                     ,"intervention",name, cost);
             statement=connection.createStatement();
             statement.executeUpdate(query);

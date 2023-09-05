@@ -12,17 +12,6 @@ public class Main {
         DbSearchFunctions dbSearchFunctions = new DbSearchFunctions();
         DbDeleteFunctions dbDeleteFunctions = new DbDeleteFunctions();
         Connection connection= db.connectToDb("VeterinaryClinic","postgres","password");
-        //dbInsertFunctions.insertRowEmployee(connection, "Mike", "Oliver", "driver");
-        //dbInsertFunctions.insertRowClient(connection,"Emily","Brown","(789) 234-5678");
-        //dbReadFunctions.readDataFromEmployee(connection);
-        //dbReadFunctions.readDataFromClient(connection);
-        //dbUpdateFunctions.UpdateString(connection, "last_name", "client", "Brown", "Swan");
-        //dbReadFunctions.readDataFromClient(connection);
-        //dbSearchFunctions.SearchInEmployeeByInteger(connection,"id",1);
-        //dbSearchFunctions.SearchInEmployeeByString(connection,"first_name","Mike");
-        //dbDeleteFunctions.deleteRowByStringValue(connection,"client","last_name","Swan");
-        //dbDeleteFunctions.deleteRowByIntegerValue(connection,"employee","id",2);
-        //dbReadFunctions.readDataFromEmployee(connection);
 
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -106,8 +95,8 @@ public class Main {
                         dbInsertFunctions.insertRowPet(connection,idClient,type);
                         break;
                     case 23:
-                        int idEmployee,idPet;
-                        String appointmentTime, data, totalCost;
+                        int idEmployee,idPet, totalCost;
+                        String appointmentTime, data;
                         System.out.println("[INFO] Inserting into 'appointments' table.");
                         System.out.print("id_employee: ");
                         idEmployee = Integer.parseInt(scanner.nextLine());
@@ -118,17 +107,18 @@ public class Main {
                         System.out.print("data: ");
                         data = scanner.nextLine();
                         System.out.print("total_cost: ");
-                        totalCost = scanner.nextLine();
+                        totalCost = Integer.parseInt(scanner.nextLine());
                         dbInsertFunctions.insertRowAppointments(connection,idEmployee, idPet, appointmentTime,
                                 data, totalCost);
                         break;
                     case 24:
-                        String name, cost;
+                        String name;
+                        int cost;
                         System.out.println("[INFO] Inserting into 'intervention' table.");
                         System.out.print("name: ");
                         name = scanner.nextLine();
                         System.out.print("cost: ");
-                        cost = scanner.nextLine();
+                        cost = Integer.parseInt(scanner.nextLine());
                         dbInsertFunctions.insertRowIntervention(connection,name, cost);
                         break;
                     case 25:
@@ -214,7 +204,8 @@ public class Main {
                                 "appointment_time, data, total_cost):");
                         typeAppointments = scanner.nextLine();
                         System.out.print("The value you are searching for: ");
-                        if(!typeAppointments.equals("id_employee") && !typeAppointments.equals("id_pet")){
+                        if(!typeAppointments.equals("id_employee") && !typeAppointments.equals("id_pet") &&
+                        !typeAppointments.equals("total_cost")){
                             valueAppointmentsString = scanner.nextLine();
                             dbSearchFunctions.SearchInAppointmentsByString(connection,typeAppointments,
                                     valueAppointmentsString);
@@ -231,7 +222,7 @@ public class Main {
                                 "cost): ");
                         typeIntervention = scanner.nextLine();
                         System.out.print("The value you are searching for: ");
-                        if(!typeIntervention.equals("id")){
+                        if(!typeIntervention.equals("id") && !typeIntervention.equals("cost")){
                             valueInterventionString = scanner.nextLine();
                             dbSearchFunctions.SearchInInterventionByString(connection,typeIntervention,
                                     valueInterventionString);
@@ -319,7 +310,8 @@ public class Main {
                         fieldUpdateAppointments = scanner.nextLine();
                         System.out.print("The data you want to replace: ");
                         if(!fieldUpdateAppointments.equals("id_employee") &&
-                                !fieldUpdateAppointments.equals("id_pet")){
+                                !fieldUpdateAppointments.equals("id_pet") &&
+                        !fieldUpdateAppointments.equals("total_cost")){
                             oldStringDataAppointments = scanner.nextLine();
                             System.out.print("The data you want to replace with: ");
                             newStringDataAppointments = scanner.nextLine();
@@ -334,15 +326,25 @@ public class Main {
                         }
                         break;
                     case 44:
-                        String fieldUpdateIntervention, newDataIntervention, oldDataIntervention;
+                        String fieldUpdateIntervention, newStringDataIntervention, oldStringDataIntervention;
+                        int newIntDataIntervention, oldIntDataIntervention;
                         System.out.print("The field you want to update (name, cost): ");
                         fieldUpdateIntervention = scanner.nextLine();
                         System.out.print("The data you want to replace: ");
-                        oldDataIntervention = scanner.nextLine();
-                        System.out.print("The data you want to replace with: ");
-                        newDataIntervention = scanner.nextLine();
-                        dbUpdateFunctions.UpdateString(connection,"intervention",fieldUpdateIntervention,
-                                oldDataIntervention, newDataIntervention);
+                        if(!fieldUpdateIntervention.equals("id") &&
+                                !fieldUpdateIntervention.equals("cost")){
+                            oldStringDataIntervention = scanner.nextLine();
+                            System.out.print("The data you want to replace with: ");
+                            newStringDataIntervention = scanner.nextLine();
+                            dbUpdateFunctions.UpdateString(connection,"intervention",
+                                    fieldUpdateIntervention, oldStringDataIntervention, newStringDataIntervention);
+                        }else{
+                            oldIntDataIntervention = Integer.parseInt(scanner.nextLine());
+                            System.out.print("The data you want to replace with: ");
+                            newIntDataIntervention= Integer.parseInt(scanner.nextLine());
+                            dbUpdateFunctions.UpdateInteger(connection,"intervention",
+                                    fieldUpdateIntervention, oldIntDataIntervention, newIntDataIntervention);
+                        }
                         break;
                     case 45:
                         String fieldUpdateInterventionProgramming;
@@ -432,14 +434,15 @@ public class Main {
                                 "appointment_time, data, total_cost): ");
                         fieldDeleteAppointments = scanner.nextLine();
                         System.out.print("The data with the row you want to delete : ");
-                        if(!fieldDeleteAppointments.equals("id")){
-                            stringDataAppointments = scanner.nextLine();
-                            dbDeleteFunctions.deleteRowByStringValue(connection,"appointments",fieldDeleteAppointments,
-                                    stringDataAppointments);
-                        }else{
+                        if(!fieldDeleteAppointments.equals("appointment_time")
+                        && !fieldDeleteAppointments.equals("data")){
                             intDataAppointments = Integer.parseInt(scanner.nextLine());
                             dbDeleteFunctions.deleteRowByIntegerValue(connection,"appointments",fieldDeleteAppointments,
                                     intDataAppointments);
+                        }else{
+                            stringDataAppointments = scanner.nextLine();
+                            dbDeleteFunctions.deleteRowByStringValue(connection,"appointments",fieldDeleteAppointments,
+                                    stringDataAppointments);
                         }
                         break;
                     case 54:
@@ -448,7 +451,7 @@ public class Main {
                         System.out.print("The field you want to delete (id, name, cost): ");
                         fieldDeleteIntervention = scanner.nextLine();
                         System.out.print("The data with the row you want to delete : ");
-                        if(!fieldDeleteIntervention.equals("id")){
+                        if(!fieldDeleteIntervention.equals("id") && !fieldDeleteIntervention.equals("cost")){
                             stringDataIntervention = scanner.nextLine();
                             dbDeleteFunctions.deleteRowByStringValue(connection,"intervention",fieldDeleteIntervention,
                                     stringDataIntervention);
@@ -544,26 +547,26 @@ public class Main {
     private static void displayUpdateMenu()
     {
         System.out.println("----- UPDATE -----");
-        System.out.println("30. Update a row in 'employee' table");
-        System.out.println("31. Update a row in 'client' table");
-        System.out.println("32. Update a row in 'pet' table");
-        System.out.println("33. Update a row in 'appointments' table");
-        System.out.println("34. Update a row in 'intervention' table");
-        System.out.println("35. Update a row in 'intervention_programming' table");
-        System.out.println("36. Update a row in 'timetable' table");
+        System.out.println("40. Update a row in 'employee' table");
+        System.out.println("41. Update a row in 'client' table");
+        System.out.println("42. Update a row in 'pet' table");
+        System.out.println("43. Update a row in 'appointments' table");
+        System.out.println("44. Update a row in 'intervention' table");
+        System.out.println("45. Update a row in 'intervention_programming' table");
+        System.out.println("46. Update a row in 'timetable' table");
         System.out.println("------------------");
     }
 
     private static void displayDeleteMenu()
     {
         System.out.println("----- DELETE -----");
-        System.out.println("30. Delete a row in 'employee' table");
-        System.out.println("31. Delete a row in 'client' table");
-        System.out.println("32. Delete a row in 'pet' table");
-        System.out.println("33. Delete a row in 'appointments' table");
-        System.out.println("34. Delete a row in 'intervention' table");
-        System.out.println("35. Delete a row in 'intervention_programming' table");
-        System.out.println("36. Delete a row in 'timetable' table");
+        System.out.println("50. Delete a row in 'employee' table");
+        System.out.println("51. Delete a row in 'client' table");
+        System.out.println("52. Delete a row in 'pet' table");
+        System.out.println("53. Delete a row in 'appointments' table");
+        System.out.println("54. Delete a row in 'intervention' table");
+        System.out.println("55. Delete a row in 'intervention_programming' table");
+        System.out.println("56. Delete a row in 'timetable' table");
         System.out.println("------------------");
     }
 }
