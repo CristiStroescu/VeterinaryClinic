@@ -11,7 +11,11 @@ For creating the database:
 After this, in the Main class, in the line where is called the "connectToDb" method, modify the parameters with the name of your database, your PostgreSql username and your PostgreSql password.
 
 The versions I used:
+
 SDK: openjdk-19
+
 Driver: postgresql-42.6.0.jar
+
 PostgreSQL: PostgreSQL 15
+
 IntelliJ: IntelliJ IDEA 2022.2.3 (Ultimate Edition)
