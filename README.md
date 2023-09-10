@@ -1,12 +1,17 @@
 # VeterinaryClinic
 
-You will need an editor (I used IntelliJ IDEA), you will need to install PostgreSQL and a driver from the site https://jdbc.postgresql.org/download/ that connects the app to the database. You should keep the driver in a place you will remember, because you will update the project with the .jar file manually.
+You will need an editor (I used IntelliJ IDEA), and you will need to install PostgreSQL.
 
-To add the .jar file in IntelliJ, right click to the project name -> "Open Module Settings" -> "Libraries" -> click on "+" button -> "Java" -> search and add the .jar file you downloaded -> "Ok" -> "Ok" -> "Apply" -> "Ok".
+The project should already have a .jar file, a JDBC driver that connects the app to the database.
+
+To verify if there is the file, right click to the project name -> "Open Module Settings" -> "Libraries", and you should see the .jar file named "postgresql-42.6.0.jar".
+
+If the .jar file is missing, go to https://jdbc.postgresql.org/download/, download the Java 8 version(keep the file in a place you will remember, because you will update the project with this file manually), then right click to the project name -> "Open Module Settings" -> "Libraries" -> click on "+" button -> "Java" -> search and add the .jar file you downloaded -> "Ok" -> "Ok" -> "Apply" -> "Ok".
 
 For creating the database:
 1. If you have the backup of my database, open pgAdmin -> right-click on "PostgreSQL" -> "Create..." -> "Database" -> "Save" -> right-click on the new database you created -> "Restore..." -> search for the backup file -> "Restore".
 2. If you don't have the backup, you must create the database manually, using exactly the same names of the tables and their columns I used (if you don't want to modify anything in the Java code).
+IMPORTANT: If you create the database manually, make all the fields where you see the name "id" to be autoincrement, because if you insert a row in one of those tables, you cannot assign a value to the id field in my app.
 
 After this, in the Main class, in the line where is called the "connectToDb" method, modify the parameters with the name of your database, your PostgreSql username and your PostgreSql password.
 
