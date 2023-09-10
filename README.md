@@ -13,7 +13,7 @@ For creating the database:
 2. If you don't have the backup, you must create the database manually, using exactly the same names of the tables and their columns I used (if you don't want to modify anything in the Java code).
 IMPORTANT: If you create the database manually, make all the fields where you see the name "id" to be autoincrement, because if you insert a row in one of those tables, you cannot assign a value to the id field in my app.
 
-After this, in the Main class, in the line where is called the "connectToDb" method, modify the parameters with the name of your database, your PostgreSql username and your PostgreSql password.
+After this, in the Main class, at the line where is called the "connectToDb" method, modify the arguments with the name of your database, your PostgreSql username and your PostgreSql password.
 
 The versions I used:
 
